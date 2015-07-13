@@ -1,0 +1,21 @@
+.map {
+  display : inline-block;
+  width : 500px;
+  height : 500px;
+  vertical-align : top;
+}
+
+blockquote {
+  display : inline-block;
+  width : 500px;
+  height : 500px;
+  font-family : Courier, monospace;
+  font-size : 12px;
+  white-space : pre;
+  overflow : auto;
+  vertical-align : top;
+}
+
+input {
+  display : block;
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/googlemaps.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="../googlemaps.js"></script>
+    <script language="javascript">
+      $(document).ready(function() {
+        $("blockquote").each(function() {
+          eval($(this).text());
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <h1>Point, range and route</h1>
+    <div id="map" class="map"></div>
+    <blockquote>
+      // Initialize the Map
+      var map = $("#map").googlemaps();
+      // Polygon
+      var deliveryArea = map.setPolygon([
+        "52.225808, 18.632813",
+        "52.051754, 18.520203",
+        "51.932469, 18.259277",
+        "51.941123, 18.143921",
+        "52.012027, 17.970886",
+        "52.301428, 17.918701",
+        "52.335760, 18.352661",
+        "52.225808, 18.632813"
+      ]);
+      // Marker
+      map.setMarkerAtAddress("Konin, Polska", function(marker) {
+        map.setCenterAtMarker(marker, 9);
+        map.setRoute('Turek, Polska', marker);
+      }, undefined, {
+        'title' : 'Konin'
+      }, 'images/flower.png');
+    </blockquote>
+    
+  </body>
+</html>

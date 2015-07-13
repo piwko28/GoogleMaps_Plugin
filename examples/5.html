@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/googlemaps.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="../googlemaps.js"></script>
+    <script language="javascript">
+      $(document).ready(function() {
+        $("blockquote").each(function() {
+          eval($(this).text());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <h1>Distances</h1>
+    <div id="map4" class="map"></div>
+    <blockquote>
+      var map4 = $("#map4").googlemaps();
+      map4.setMarkersAtAddresses([
+        "Polska",
+        "Niemcy",
+        "Holandia",
+        "Ukraina",
+        "Rosja"
+      ], function(markers) {
+        var from = markers.shift();
+        map4.setCenterAtMarker(from, 5);
+        map4.getDistances(from, markers, function(results, status) {
+          for(var i in results) {
+            var result = results[i];
+            var info = "";
+            if(result.precisly) {
+              info = "Distance by route: " + Math.round(result.routeDistance) + " km. Distance by air: " + Math.round(result.airDistance) + " km.";
+            } else {
+              info = "Distance: " + Math.round(result.distance) + " km.";
+            }
+            map4.setInfoWindowAtMarkerOnClick(result.marker, info, undefined, true);
+          }
+          var nearest = results[0];
+          map4.setCenterAtMarker(nearest.marker, 5);
+          if(nearest.precisly) {
+            map4.setInfoWindowAtMarker(nearest.marker, "Nearest country from Poland. Distance by route: " + Math.round(nearest.routeDistance) + " km. Distance by air: " + Math.round(nearest.airDistance) + " km.");
+          } else {
+            map4.setInfoWindowAtMarker(nearest.marker, "Nearest country from Poland. Distance: " + Math.round(nearest.distance) + " km.");
+          }
+          map4.setRoute(from, nearest.marker);
+        }, 3);
+      }, function() {
+        console.log('error');
+      });
+    </blockquote>
+    
+  </body>
+</html>

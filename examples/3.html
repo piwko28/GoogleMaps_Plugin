@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/googlemaps.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="../googlemaps.js"></script>
+    <script language="javascript">
+      $(document).ready(function() {
+        $("blockquote").each(function() {
+          eval($(this).text());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <h1>City triangle and styles</h1>
+    <div id="map2" class="map"></div>
+    <blockquote>
+      var map2 = $("#map2").googlemaps();
+      map2.setStyles([
+        {
+          "stylers": [
+            { "gamma": 0.38 }
+          ]
+        }
+      ]);
+      map2.setCenterAtAddress("Polska", 6, function() {
+        map2.setMarkersAtAddresses([
+          "Warszawa",
+          "Kraków",
+          "Wrocław"
+        ], function(markers) {
+          map2.setPolygon([
+            markers[0],
+            markers[1],
+            markers[2],
+            "51, 19",
+            markers[0]
+          ]);
+        });
+      });
+    </blockquote>
+    
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/googlemaps.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script type="text/javascript" src="../googlemaps.js"></script>
+    <script language="javascript">
+      $(document).ready(function() {
+        $("blockquote").each(function() {
+          eval($(this).text());
+        });
+      });
+    </script>
+  </head>
+  <body>
+    
+    <h1>Street view</h1>
+    <div id="map3" class="map">51.047492,16.962504</div>
+    <blockquote>
+      $("#map3").each(function() {
+        var address = $(this).text();
+        var map3 = $(this).googlemaps();
+        map3.setCenterAtAddress(address, 16, function() {
+          map3.setStreetView(function(panorama) {
+            panorama.addBuilding('mycompany', 'My company', 'https://google-developers.appspot.com/maps/documentation/javascript/examples/images/panoReception1024-0.jpg', -20, 180);
+          });
+          map3.setStreetViewDirection(-21);
+        });
+        $("#map3direction").click(function() {
+          console.log(map3.getStreetViewData());
+        });
+      });
+    </blockquote>
+    <input type="submit" id="map3direction" value="Direction" />
+    
+  </body>
+</html>
