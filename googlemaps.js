@@ -27,8 +27,7 @@
  *
  * @description
  * Date: March 21, 2013
- * Website: http://jquery-googlemaps-plugin.googlecode.com/
- * License: non-free software, please contact with author
+ * License: MIT + Beerware
  * Put in head:
  *  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
  *  and this file.
